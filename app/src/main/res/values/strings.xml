@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Edit</string>
+    <string name="button1">图片</string>
+    <string name="button2">表格</string>
+    <string name="button3">视频</string>
+    <string name="button4">音频</string>
+
+    <string name="button1_1">灰度</string>
+    <string name="button1_2">RGB</string>
+    <string name="button1_3">HSV</string>
+
+    <string name="button2_1">新建表格</string>
+
+    <string name="button3_1">视频裁剪</string>
+
+    <string name="button4_1">音频裁剪</string>
+</resources>
