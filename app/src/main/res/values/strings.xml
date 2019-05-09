@@ -14,4 +14,6 @@
     <string name="button3_1">视频裁剪</string>
 
     <string name="button4_1">音频裁剪</string>
+    <string name="button1_choose">选择图片</string>
+    <string name="Image">图片</string>
 </resources>
