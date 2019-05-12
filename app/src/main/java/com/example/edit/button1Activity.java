@@ -107,7 +107,6 @@ public class button1Activity extends AppCompatActivity {
         int height = bmSrc.getHeight();
 
         // 创建目标灰度图像
-
         Bitmap bmpGray = null;
 
         bmpGray = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
