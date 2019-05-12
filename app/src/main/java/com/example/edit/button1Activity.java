@@ -1,5 +1,8 @@
 package com.example.edit;
 
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
@@ -22,13 +25,13 @@ import android.widget.ImageView;
 
 
 public class button1Activity extends AppCompatActivity {
-    protected static final int CHOOSE_PICTURE = 0;
+    protected static final int RESULT_LOAD_image = 1;
     private Button Button1_1;
     private Button Button1_2;
     private Button Button1_3;
     private Button Button1_choose;
     private ImageView iconIv;
-    private Bitmap bmSrc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,7 @@ public class button1Activity extends AppCompatActivity {
         Button1_3 = findViewById(R.id.button1_3);
         Button1_choose = findViewById(R.id.button1_choose);
         iconIv = findViewById(R.id.Imageview);
-        bmSrc =BitmapFactory.decodeResource(getResources(), R.id.Imageview);
+
         Button1_1.setOnClickListener(new Button1Listener());//监听
         // Button1_2.setOnClickListener(new Button2Listener());
         //  Button1_3.setOnClickListener(new Button3Listener());
@@ -48,8 +51,9 @@ public class button1Activity extends AppCompatActivity {
     class Button1Listener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-           Bitmap photo= bitmap2Gray(bmSrc);
-            iconIv.setImageBitmap(photo);
+            Bitmap  bmSrc =BitmapFactory.decodeResource(getResources(), R.id.Imageview);
+
+            iconIv.setImageBitmap(bitmap2Gray(bmSrc));
         }
     }
     class Button4Listener implements View.OnClickListener {
@@ -58,27 +62,31 @@ public class button1Activity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent_gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent_gallery.setType("image/*");
-            startActivityForResult(intent_gallery, 1);
+            startActivityForResult(intent_gallery, RESULT_LOAD_image);
 
         }
     }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
-               setImageToView(data);
+        if (requestCode == RESULT_LOAD_image && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            iconIv.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
         }
 
     }
-    protected void setImageToView(Intent data) {
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
-            iconIv.setImageBitmap(photo);
-        }
-    }
+
+
 
     /**
 
