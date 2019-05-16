@@ -10,10 +10,13 @@
     <string name="button1_3">HSV</string>
 
     <string name="button2_1">新建表格</string>
-
     <string name="button3_1">视频裁剪</string>
-
     <string name="button4_1">音频裁剪</string>
+
     <string name="button1_choose">选择图片</string>
     <string name="Image">图片</string>
+    <string name="button_save">保存图片</string>
+    <string name="Saturation">饱和度</string>
+    <string name="Brightness">亮度</string>
+    <string name="Contrast">对比度</string>
 </resources>
