@@ -3,6 +3,7 @@ package com.example.edit;
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -83,7 +84,8 @@ public class button1Activity extends AppCompatActivity {
         Button1_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iconIv.setImageBitmap(bitmap2Gray(bit));
+                bit=bitmap2Gray(bit);
+                iconIv.setImageBitmap(bit);
             }
         });//监听
 
@@ -116,7 +118,7 @@ public class button1Activity extends AppCompatActivity {
                 Canvas canvas = new Canvas(dstBitmap);
                 // 在Canvas上绘制一个已经存在的Bitmap。这样，dstBitmap就和srcBitmap一摸一样了
                 canvas.drawBitmap(bit, 0, 0, paint);
-
+                bit=dstBitmap;
                 iconIv.setImageBitmap(dstBitmap);
 
             }
@@ -135,7 +137,7 @@ public class button1Activity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar arg0, int progress,
                                           boolean fromUser) {
-                Bitmap bmp = Bitmap.createBitmap(imgWidth, imgHeight,
+                Bitmap dstBitmap = Bitmap.createBitmap(imgWidth, imgHeight,
                         Bitmap.Config.ARGB_8888);
                 int brightness = progress - 127;
                 ColorMatrix cMatrix = new ColorMatrix();
@@ -146,10 +148,11 @@ public class button1Activity extends AppCompatActivity {
                 Paint paint = new Paint();
                 paint.setColorFilter(new ColorMatrixColorFilter(cMatrix));
 
-                Canvas canvas = new Canvas(bmp);
+                Canvas canvas = new Canvas(dstBitmap);
                 // 在Canvas上绘制一个已经存在的Bitmap。这样，dstBitmap就和srcBitmap一摸一样了
                 canvas.drawBitmap(bit, 0, 0, paint);
-                iconIv.setImageBitmap(bmp);
+                bit=dstBitmap;
+                iconIv.setImageBitmap(dstBitmap);
 
             }
 
@@ -181,7 +184,7 @@ public class button1Activity extends AppCompatActivity {
                 Canvas canvas = new Canvas(dstBitmap);
                 // 在Canvas上绘制一个已经存在的Bitmap。这样，dstBitmap就和srcBitmap一摸一样了
                 canvas.drawBitmap(bit, 0, 0, paint);
-
+                bit=dstBitmap;
                 iconIv.setImageBitmap(dstBitmap);
             }
 
@@ -197,29 +200,6 @@ public class button1Activity extends AppCompatActivity {
         });
     }
 
-
-    /*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RESULT_LOAD_image && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-           picturePath = cursor.getString(columnIndex);
-            cursor.close();
-           bit = BitmapFactory.decodeFile(picturePath);
-            iconIv.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-
-        }
-
-    }
-    */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -284,52 +264,91 @@ public class button1Activity extends AppCompatActivity {
     }
 
 
+
     public static void saveImageToGallery(Context context, Bitmap bmp) {
+
         // 首先保存图片
+
         File appDir = new File(Environment.getExternalStorageDirectory(), "Edit相册");
+
         if (!appDir.exists()) {
+
             appDir.mkdir();
+
         }
+
         String fileName = System.currentTimeMillis() + ".jpg";
+
         File file = new File(appDir, fileName);
+
         try {
+
             FileOutputStream fos = new FileOutputStream(file);
+
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
             fos.flush();
+
             fos.close();
+
         } catch (FileNotFoundException e) {
+
             e.printStackTrace();
+
         } catch (IOException e) {
+
             e.printStackTrace();
+
         }
+
+
 
         // 其次把文件插入到系统图库
+
         try {
+
             MediaStore.Images.Media.insertImage(context.getContentResolver(),
+
                     file.getAbsolutePath(), fileName, null);
+
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public String saveImage(String name, Bitmap bmp) {
-        File appDir = new File(Environment.getExternalStorageDirectory().getPath());
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
-        String fileName = name + ".jpg";
-        File file = new File(appDir, fileName);
-
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-            return file.getAbsolutePath();
-        } catch (IOException e) {
             e.printStackTrace();
+
         }
-        return null;
+
+        // 最后通知图库更新
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { // 判断SDK版本是不是4.4或者高于4.4
+
+            String[] paths = new String[]{file.getAbsolutePath()};
+
+            MediaScannerConnection.scanFile(context, paths, null, null);
+
+        } else {
+
+            final Intent intent;
+
+            if (file.isDirectory()) {
+
+                intent = new Intent(Intent.ACTION_MEDIA_MOUNTED);
+
+                intent.setClassName("com.android.providers.media", "com.android.providers.media.MediaScannerReceiver");
+
+                intent.setData(Uri.fromFile(Environment.getExternalStorageDirectory()));
+
+            } else {
+
+                intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+
+                intent.setData(Uri.fromFile(file));
+
+            }
+
+            context.sendBroadcast(intent);
+
+        }
+
     }
 
 }
