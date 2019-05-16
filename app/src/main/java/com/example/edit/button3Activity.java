@@ -42,7 +42,6 @@ public class  button3Activity extends MainActivity {
             Cursor cursor = getContentResolver().query(selectedVideo,
                     filePathColumn, null, null, null);
             cursor.moveToFirst();
-
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
            VIDEOPATH = cursor.getString(columnIndex);
             cursor.close();
