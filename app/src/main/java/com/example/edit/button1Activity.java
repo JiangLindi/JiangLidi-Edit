@@ -66,7 +66,6 @@ public class button1Activity extends AppCompatActivity {
         Button1_choose = findViewById(R.id.button1_choose);
         Button_save = findViewById(R.id.button_save);
         iconIv = findViewById(R.id.Imageview);
-
         SaturationseekBar = findViewById(R.id.Saturationseekbar);
         BrightnessseekBar = findViewById(R.id.Brightnessseekbar);
         ContrastseekBar = findViewById(R.id.Contrastseekbar);
