@@ -29,6 +29,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 
+
+
 public class button1Activity extends AppCompatActivity {
     protected static final int RESULT_LOAD_image = 1;
     private Button Button1_1;
@@ -61,8 +63,6 @@ public class button1Activity extends AppCompatActivity {
 
     private void initView() {
         Button1_1 = findViewById(R.id.button1_1);//灰度按钮
-        Button1_2 = findViewById(R.id.button1_2);
-        Button1_3 = findViewById(R.id.button1_3);
         Button1_choose = findViewById(R.id.button1_choose);
         Button_save = findViewById(R.id.button_save);
         iconIv = findViewById(R.id.Imageview);

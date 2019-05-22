@@ -19,4 +19,7 @@
     <string name="Saturation">饱和度</string>
     <string name="Brightness">亮度</string>
     <string name="Contrast">对比度</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="stop">停止</string>
 </resources>

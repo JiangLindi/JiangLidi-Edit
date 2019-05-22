@@ -7,16 +7,58 @@
     tools:context=".button4Activity">
 
     <Button
-        android:id="@+id/button4_1"
-        android:layout_width="wrap_content"
+
+        android:id="@+id/play"
+
+        android:layout_width="88dp"
+
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="464dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="219dp"
-        android:text="@string/button4_1"
+
+        android:layout_marginTop="442dp"
+        android:layout_marginEnd="323dp"
+        android:layout_marginBottom="241dp"
+        android:layout_weight="1"
+        android:text="@string/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+
+        android:id="@+id/pause"
+
+        android:layout_width="100dp"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="442dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="241dp"
+        android:layout_weight="1"
+        android:text="@string/pause"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+
+        android:id="@+id/stop"
+
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="441dp"
+
+        android:layout_marginBottom="242dp"
+        android:layout_weight="1"
+        android:text="@string/stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>

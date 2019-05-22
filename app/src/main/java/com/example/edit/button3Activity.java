@@ -1,5 +1,4 @@
 package com.example.edit;
-
 //import android.media.session.MediaController;
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -56,6 +56,9 @@ public class  button3Activity extends MainActivity {
             return;
         }
     }
+
+
+
 
 
 
