@@ -17,16 +17,19 @@ private Button Button4;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button1=findViewById(R.id.button1);
-        Button2=findViewById(R.id.button2);
-        Button3=findViewById(R.id.button3);
-        Button4=findViewById(R.id.button4);
+        Button1=findViewById(R.id.button1);//图片按钮
+        Button2=findViewById(R.id.button2);//表格按钮
+        Button3=findViewById(R.id.button3);//视频按钮
+        Button4=findViewById(R.id.button4);//音频按钮
         Button1.setOnClickListener(new Button1Listener());
         Button2.setOnClickListener(new Button2Listener());
         Button3.setOnClickListener(new Button3Listener());
         Button4.setOnClickListener(new Button4Listener());
 
     }
+    /*
+    图片按钮的监听：跳转界面
+     */
     class Button1Listener implements View.OnClickListener{
         @Override
         public void  onClick(View arg0){
@@ -36,6 +39,9 @@ private Button Button4;
 
         }
     }
+    /*
+    表格按钮监听：跳转界面
+     */
     class Button2Listener implements View.OnClickListener{
         @Override
         public void  onClick(View arg0){
@@ -45,6 +51,9 @@ private Button Button4;
 
         }
     }
+    /*
+    视频按钮监听：跳转至播放界面
+     */
     class Button3Listener implements View.OnClickListener{
         @Override
         public void  onClick(View arg0){
@@ -54,6 +63,9 @@ private Button Button4;
 
         }
     }
+    /*
+    音频按钮监听：跳转至音乐播放
+     */
     class Button4Listener implements View.OnClickListener{
         @Override
         public void  onClick(View arg0){
