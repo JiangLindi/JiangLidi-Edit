@@ -63,13 +63,15 @@ public class button1Activity extends AppCompatActivity {
 
     private void initView() {
         Button1_1 = findViewById(R.id.button1_1);//灰度按钮
-        Button1_choose = findViewById(R.id.button1_choose);
-        Button_save = findViewById(R.id.button_save);
-        iconIv = findViewById(R.id.Imageview);
-        SaturationseekBar = findViewById(R.id.Saturationseekbar);
-        BrightnessseekBar = findViewById(R.id.Brightnessseekbar);
-        ContrastseekBar = findViewById(R.id.Contrastseekbar);
-
+        Button1_choose = findViewById(R.id.button1_choose);//选择图片按钮
+        Button_save = findViewById(R.id.button_save);//保存图片按钮
+        iconIv = findViewById(R.id.Imageview);//绑定图片
+        SaturationseekBar = findViewById(R.id.Saturationseekbar);//饱和度滑动条
+        BrightnessseekBar = findViewById(R.id.Brightnessseekbar);//亮度滑动条
+        ContrastseekBar = findViewById(R.id.Contrastseekbar);//对比度滑动条
+        /*
+        打开图库，选择图片
+         */
         Button1_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +81,9 @@ public class button1Activity extends AppCompatActivity {
 
             }
         });
-
+/*
+一键灰度化
+ */
         Button1_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +92,9 @@ public class button1Activity extends AppCompatActivity {
             }
         });//监听
 
-        // Button1_2.setOnClickListener(new Button2Listener());
-        //  Button1_3.setOnClickListener(new Button3Listener());
+       /*
+       保存图片
+        */
         Button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +102,9 @@ public class button1Activity extends AppCompatActivity {
                 saveImageToGallery(button1Activity.this, bit);
             }
         });
-
+/*
+饱和度滑动条的监听
+ */
 
         SaturationseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // 当拖动条的滑块位置发生改变时触发该方法
@@ -130,7 +137,9 @@ public class button1Activity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar bar) {
             }
         });
-
+/*
+亮度滑动条监听
+ */
         BrightnessseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // 当拖动条的滑块位置发生改变时触发该方法
             @Override
@@ -163,6 +172,9 @@ public class button1Activity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar bar) {
             }
         });
+        /*
+        对比度滑动条
+         */
         ContrastseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // 当拖动条的滑块位置发生改变时触发该方法
             @Override

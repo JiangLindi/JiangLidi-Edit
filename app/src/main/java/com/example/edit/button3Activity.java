@@ -30,12 +30,13 @@ public class  button3Activity extends MainActivity {
         mVideoView1=findViewById(R.id.mVedioView1);
         myController=new MediaController(this);
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, 66);
+        startActivityForResult(i, 66);//调用系统相册
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 66 && resultCode == RESULT_OK && null != data) {
+            //获取视频本地路径
             Uri selectedVideo = data.getData();
             String[] filePathColumn = {MediaStore.Video.Media.DATA};
 
