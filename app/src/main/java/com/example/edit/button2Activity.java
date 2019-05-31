@@ -24,7 +24,6 @@ public class button2Activity extends MainActivity {
     private EditText column;
     private Button bt1;
     private TableLayout tableLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,19 +33,15 @@ public class button2Activity extends MainActivity {
         //获取文本输入框控件
         row = findViewById(R.id.editText1);
         column = findViewById(R.id.editText2);
-
         //给button按钮绑定单击事件
         bt1.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
                 if(row.getText().length()>0&&column.getText().length()>0){
                     //把输入的行和列转为整形
                     int row_int=Integer.parseInt(row.getText().toString());
                     int col_int=Integer.parseInt(column.getText().toString());
-
-
                     //获取控件tableLayout
                     tableLayout = (TableLayout)findViewById(R.id.table1);
                     //清除表格所有行
@@ -63,22 +58,16 @@ public class button2Activity extends MainActivity {
                             TextView tv=new TextView(button2Activity.this);
                             //Button bt=new Button(MainActivity.this);
                             tv.setText("("+i+","+j+")");
-
                             tableRow.addView(tv);
                         }
                         //新建的TableRow添加到TableLayout
-
                         tableLayout.addView(tableRow, new TableLayout.LayoutParams(MP, WC,1));
-
                     }
                 }else{
                     Toast.makeText(button2Activity.this,"请输入数值",1).show();
                 }
             }
         });
-
-
     }
-
 }
 
